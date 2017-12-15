@@ -1,0 +1,226 @@
+/*
+Autor:  Micha³ Trznadel
+Grupa:  WT/N 7:50
+Temat:  Laboraoria nr 4
+Data:   07 listopada 2017 r.
+*/
+#include<iostream>
+#include<cstdlib>
+#include <time.h> 
+#define ROZMIAR 5
+//*********************
+using namespace std;
+//deklaracje funkcji
+void wypisz(float tab[]);
+void wczytaj(float tab[]);
+void iledod(float tab[]);
+void suma(float tab[]);
+void srednia(float tab[]);
+void sprawdzcyzposort(float tab[]);
+void wypelnijlosowymi(float tab[]);
+void sortowanierosnaco(float tab[]);
+//*********************
+int main()
+{
+	cout << "Michal Trznadel(WT/N 7:30)" << endl << endl;
+	cout << "Program tablicowy" << endl << endl;
+	int menu;
+	float tab[ROZMIAR];
+	while (true)
+	{
+	
+		cout << "***MENU***" << endl;
+		cout << "1. Wczytaj tablice z kalwiatury" << endl;
+		cout << "2. Wypisz tablice" << endl;
+		cout << "3. Zlicz liczby dodatnie i ujemne z tablicy" << endl;
+		cout << "4. Policz sume liczb dodatnich i ujemnych z tablicy" << endl;
+		cout << "5. Policz srednia liczb dodatnich i ujemnych z tablicy" << endl;
+		cout << "6. Sprawdz czy liczby w tablicy sa posortowane" << endl;
+		cout << "7. Wypelnij tablice liczbami losowymi" << endl;
+		cout << "8. Posortuj liczby rosnaco" << endl;
+		cout << "Wybieram:";
+		cin >> menu;
+		switch (menu)
+		{
+			system("cls");
+		case 0:
+			exit(0);
+		case 1:
+			wczytaj(tab);
+			break;
+		case 2:
+			wypisz(tab);
+			break;
+		case 3:
+			iledod(tab);
+		case 4:
+			suma(tab);
+		case 5:
+			srednia(tab);
+			break;
+		case 6:
+			sprawdzcyzposort(tab);
+			break;
+		case 7:
+			wypelnijlosowymi(tab);
+				break;
+		case 8:
+			sortowanierosnaco(tab);
+			break;
+
+
+		}
+		system("pause");
+		system("cls");
+	}
+	return 0;
+}
+void wypisz(float tab[])
+{
+
+	cout << "Tab = [";
+	for (int i = 0; i< ROZMIAR; i++)
+	{
+		if (((int)(tab[i] * 100) % 10)<5)
+			cout << " " << (int)(tab[i] * 10) / 10.0 << " ";
+		else
+			cout << " " << (int)(tab[i] * 10 + 1) / 10.0 << " ";
+	}
+	cout << " ]";
+	cout << endl;
+}
+void wczytaj(float tab[])
+{
+	float a = 0;
+	for (int i = 0; i< ROZMIAR; i++)
+	{
+		cout << "Tab = [" << i << "] = ";
+		cin >> tab[i];
+	}
+}
+void iledod(float tab[])
+{
+	int d = 0, u = 0;
+	for (int i = 0; i< ROZMIAR; i++)
+	{
+		if (tab[i]>0)
+			d++;
+		if (tab[i]<0)
+			u++;
+	}
+	cout << "W tablicy jest " << d << " liczb dodatnich" << endl;
+	cout << "oraz " << u << " liczb ujemnych" << endl;
+}
+void funkcja1(float tab[])
+{
+	int d = 0, u = 0;
+	for (int i = 0; i< ROZMIAR; i++)
+	{
+		if (tab[i]>0)
+			d += tab[i];
+		if (tab[i]<0)
+			u += tab[i];
+	}
+	cout << "Suma wyszystkich licz dodatnich w tablicy to " << d << endl;
+	cout << "Suma wyszystkich licz ujemnych w tablicy to " << u << endl;
+}
+void suma(float tab[])
+{
+	int d = 0, u = 0;
+	for (int i = 0; i< ROZMIAR; i++)
+	{
+		if (tab[i]>0)
+			d += tab[i];
+		if (tab[i]<0)
+			u += tab[i];
+	}
+	cout << "Suma wyszystkich licz dodatnich w tablicy to " << d << endl;
+	cout << "Suma wyszystkich licz ujemnych w tablicy to " << u << endl;
+}
+void srednia(float tab[])
+{
+	int sd=0, su=0, d = 0, u = 0;
+	for (int i = 0; i< ROZMIAR; i++)
+	{
+		if (tab[i]>0)
+		{
+			d++;
+			sd += tab[i];
+		}
+		if (tab[i]<0)
+		{
+			u++;
+			su += tab[i];
+		}
+	}
+	if (d)
+	cout << "Srednia wyszystkich licz dodatnich w tablicy to " << sd / d*1.00 << endl;
+	else
+		cout << "Srednia wyszystkich licz dodatnich w tablicy to 0" << endl;
+	if (u)
+	cout << "Srednia wyszystkich licz ujemnych w tablicy to " << su / u*1.00 << endl;
+	else
+		cout << "Srednia wyszystkich licz ujemnych w tablicy to 0"<< endl;
+}
+void sprawdzcyzposort(float tab[])
+{
+	int czy = 1;
+	for (int i = 0; i< (ROZMIAR-1); i++)
+	{
+		if (tab[i] > tab[i+1])
+		{
+			czy = 0;
+			break;
+		}
+	}
+	if (czy==0)
+	{
+		czy = 2;
+		for (int i = 0; i < (ROZMIAR-1); i++)
+		{
+			if (tab[i] < tab[i+1])
+			{
+				czy = 0;
+				break;
+			}
+		}
+	}
+	if (czy == 0)
+	cout << "Liczby nie sa posortowanie";
+	else if (czy == 1)
+		cout << "Liczby sa posortowanie rosnaco";
+	else if (czy == 2)
+		cout << "Liczby sa posortowanie malejaco";
+		cout << endl;
+}
+void wypelnijlosowymi(float tab[])
+{
+	int min, max;
+	cout << "Podaj dolny przedzial losowanyuch liczb:" << endl;
+	cin >> min;
+	cout << "Podaj gorny przedzial losowanyuch liczb:" << endl;
+	cin >> max;
+
+	srand(time(NULL));
+	for (int i = 0; i < ROZMIAR; i++)
+	{
+		tab[i] = (min * 100 + rand() % ((max - min) * 100 + 1)) / 100.0;
+	}
+	cout << "gotowe" << endl;
+}
+void sortowanierosnaco(float tab[])
+{
+	float a;
+	for (int i = 0; i < ROZMIAR; i++)
+	{
+		for (int i = 0; i < (ROZMIAR-1); i++)
+		{
+			if (tab[i] > tab[i + 1])
+			{
+				a = tab[i];
+				tab[i] = tab[i + 1];
+				tab[i + 1] = a;
+			}
+		}
+	}
+}
